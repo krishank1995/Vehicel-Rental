@@ -1,0 +1,21 @@
+true; #Addition of Branch B1 with Car,Bike,Van support
+true; #Addition of Car V1 to Branch B1 with Price 500
+true; #Addition of Car V2 to Branch B1 with Price 1000
+true; #Addition of Bike V3 to Branch B1 with Price 250
+true; #Addition of Bike V4 to Branch B1 with Price 300
+false; #Addition of Bus ie unsupported vehicle type V5 to Branch B1 with Price 2500
+-1.0; #Booking of Van at Branch B1; no van exists so nothing booked
+500.0; #Booking of Car at Branch B1; returns the car with min price ie V1
+250.0; #Booking of Bike at Branch B1; returns the car with min price ie V3
+300.0; #Booking of Bike at Branch B1; returns the car with min price ie V4
+V2; #Displays Avalible Vehicles ie V2
+1100.0; #Booking of Car at Branch B1; returns the only pending car ie V2 with surge price (Threshold : 50%)
+true; #Drops the Car V2
+true; #Drops the Car V1
+-1.0; #Tries booking bike, none avalible
+500.0; #Books Car; get the one with min price ie V1
+1100.0; #Books Car; gets the last car with surge price (Threshold : 50%)
+-1.0; #Books Car;No car left
+
+
+
