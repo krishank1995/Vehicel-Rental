@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Program {
+public class Geektrust {
     public static void main(String[] args){
         /*
         Problem Summary :
