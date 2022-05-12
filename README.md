@@ -1,2 +1,2 @@
-# Vehicel-Rental
+# vehicle-rental
 Basic Vehicle Rental System
