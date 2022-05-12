@@ -111,15 +111,18 @@ public class Geektrust {
         switch (split[0]){
             case "ADD_BRANCH":
                 boolean branchAdditionResult = branchService.addBranch(split[1], split[2]);
-                System.out.println(String.format(format,branchAdditionResult,expectedResult));
+                String branchAdditionResultStr = String.valueOf(branchAdditionResult).toUpperCase();
+                System.out.println(String.format(format,branchAdditionResultStr,expectedResult));
                 break;
             case "ADD_VEHICLE":
                 boolean vehicleAdditionResult = vehicleService.addVehicle(split[1],split[2],split[3],Double.parseDouble(split[4]));
-                System.out.println(String.format(format,vehicleAdditionResult,expectedResult));
+                String vehicleAdditionResultStr = String.valueOf(vehicleAdditionResult).toUpperCase();
+                System.out.println(String.format(format,vehicleAdditionResultStr,expectedResult));
                 break;
             case "BOOK":
                 Double bookingResult = bookingService.bookVehicle(split[1],split[2],Integer.parseInt(split[3]),Integer.parseInt(split[4]));
-                System.out.println(String.format(format,bookingResult,expectedResult));
+                int bookingResultInt = (int) Math.round(bookingResult);
+                System.out.println(String.format(format,bookingResultInt,expectedResult));
                 break;
             case "DISPLAY_VEHICLES":
                 List<String> availableVehicles = bookingService.displayAvailableVehicleIds(split[1], Integer.parseInt(split[2]), Integer.parseInt(split[3]));
