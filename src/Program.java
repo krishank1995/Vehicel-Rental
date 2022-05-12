@@ -1,4 +1,5 @@
 
+import Common.Constants;
 import Service.BookingService;
 import Service.RentalBranchService;
 import Service.VehicleService;
@@ -47,7 +48,30 @@ public class Program {
         4. DISPLAY_VEHICLES -> CSV VEHICLE_NAMES
         */
 
-       readFileAndInvokeTestCases("./resources/input.txt","./resources/expected_output.txt");
+       if(args.length==0){
+           //Local Test Suite
+           Constants.SURGE_THRESHOLD = 50.0;
+           readFileAndInvokeTestCases("./resources/input.txt","./resources/expected_output.txt");
+       }else{
+           readFileAndInvokeTestCases(args[0]);
+       }
+    }
+
+    public static void readFileAndInvokeTestCases(String inputFileName){
+        try {
+            File inputFile = new File(inputFileName);
+            Scanner inputReader = new Scanner(inputFile);
+
+
+            while (inputReader.hasNextLine()) {
+                String input = inputReader.nextLine();
+                invokeRentalService(input,"");
+            }
+            inputReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     public static void readFileAndInvokeTestCases(String inputFileName,String expectedOutputFileName){
@@ -71,7 +95,10 @@ public class Program {
     }
 
     public static void invokeRentalService(String methodCallWithParams,String expectedOutput){
-        String format = "Expected:%s ; Output:%s";
+        String format = "Output:%s ; Expected:%s";
+        if(expectedOutput==""){
+            format = "%s";
+        }
         RentalBranchService branchService = new RentalBranchServiceImpl();
         BookingService bookingService = new BookingServiceImpl();
         VehicleService vehicleService = new VehicleServiceImpl();
@@ -84,23 +111,23 @@ public class Program {
         switch (split[0]){
             case "ADD_BRANCH":
                 boolean branchAdditionResult = branchService.addBranch(split[1], split[2]);
-                System.out.println(String.format(format,expectedResult,branchAdditionResult));
+                System.out.println(String.format(format,branchAdditionResult,expectedResult));
                 break;
             case "ADD_VEHICLE":
                 boolean vehicleAdditionResult = vehicleService.addVehicle(split[1],split[2],split[3],Double.parseDouble(split[4]));
-                System.out.println(String.format(format,expectedResult,vehicleAdditionResult));
+                System.out.println(String.format(format,vehicleAdditionResult,expectedResult));
                 break;
             case "BOOK":
                 Double bookingResult = bookingService.bookVehicle(split[1],split[2],Integer.parseInt(split[3]),Integer.parseInt(split[4]));
-                System.out.println(String.format(format,expectedResult,bookingResult));
+                System.out.println(String.format(format,bookingResult,expectedResult));
                 break;
             case "DISPLAY_VEHICLES":
                 List<String> availableVehicles = bookingService.displayAvailableVehicleIds(split[1], Integer.parseInt(split[2]), Integer.parseInt(split[3]));
-                System.out.println(String.format(format,expectedResult,String.join(",",availableVehicles)));
+                System.out.println(String.format(format,String.join(",",availableVehicles),expectedResult));
                 break;
             case "DROP":
                 boolean closeBookingResponse = bookingService.closeBooking(split[1]);
-                System.out.println(String.format(format,expectedResult,closeBookingResponse));
+                System.out.println(String.format(format,closeBookingResponse,expectedResult));
                 break;
 
             default:

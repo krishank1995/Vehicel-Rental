@@ -14,7 +14,7 @@ public class Constants {
     public static final String INVALID_BRANCH = "Invalid Branch %s";
     public static final String UNSUPPORTED_VEHICLE_ADDITION_FOR_BRANCH = "Un-supoorted Vehicle being added : %s to branch";
 
-    public static final Double SURGE_THRESHOLD = 50.0;
+    public static  Double SURGE_THRESHOLD = 80.0;
     public static final Double SURGE_PERCENT = 1.1;
     public static final Double SURGE_BASE = 1.0;
 
